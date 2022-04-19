@@ -1,0 +1,97 @@
+------------------------
+          DUAL
+------------------------
+
+1) Perform arithmetic opearations
+- SELECT 12/3+9*5-2 FROM DUAL;
+
+2) Print current date and time
+- SELECT CURRENT_TIMESTAMP FROM DUAL;
+
+3) Convert lower case string to upper case
+- SELECT LOWER('TAYLOR SWIFT') FROM DUAL;
+
+4) Print substring from a given string.
+- SELECT SUBSTR('TAYLOR SWIFT',4,6) FROM DUAL;
+
+5) Print today, tomorrow and yesterday's date
+- SELECT CURRENT_DATE AS TODAY, CURRENT_DATE+1 AS TOMORROW, CURRENT_DATE-1 AS YESTERDAY FROM DUAL;
+
+6) Find MONTH and YEAR from a date
+- SELECT EXTRACT(MONTH FROM CURRENT_DATE) AS MON, EXTRACT(YEAR FROM CURRENT_DATE) AS YEAR from DUAL;
+
+7) Check atleast 5 different trigonometric functions
+- select sin(90), cos(90), tan(45), sinh(30), cosh(45) from dual;
+
+8) Check the use of ceiling, floor, absolute, random functions in SQL
+- select ceil(9.74), floor(7.92), abs(-827), rand() from dual;
+
+9) Calculate the square root of 5
+- select sqrt(5) from dual;
+
+10) Display the name "IVAN BAYROSS" in lowercase
+- SELECT LOWER('IVAN BAYROSS') FROM DUAL;
+
+11) Display the name "IVAN BAYROSS" in uppercase
+- SELECT UPPER('ivan bayross') FROM DUAL;
+
+12) Print the SYSTEM DATE in the format 'DD/MM/YYYY'
+- SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM DUAL;
+
+13) Display the number of months between '02-JAN-01' and '02-JUL-01'
+- SELECT MONTHS_BETWEEN('02-JUL-01','02-JAN-01') FROM DUAL;
+
+14) ADD 5 months to the present date and print the output
+- SELECT ADD_MONTHS(CURRENT_DATE,5) FROM DUAL;
+
+15) ROUND OFF 15.19 to one decimal point
+- SELECT ROUND(15.19,1) FROM DUAL;
+
+----------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE EMP_59(
+EMPNO NUMBER(4) PRIMARY KEY,
+ENAME VARCHAR2(10),
+JOB VARCHAR2(20),
+MGR NUMBER(4),
+HIREDATE DATE,
+SAL NUMBER(6),
+COMM NUMBER(4) DEFAULT 0,
+DEPT_NAME VARCHAR2(20),
+CHECK (EMPNO BETWEEN 7000 AND 8000),
+CHECK ((COMM < 1500 AND JOB = 'Salesman') OR JOB != 'Salesman'));
+
+INSERT INTO EMP_59 VALUES(7362, 'Madhurima', 'Analyst', 7642, '14-Feb-02', 50000, DEFAULT, 'Marketing');
+INSERT INTO EMP_59 VALUES(7563, 'Turner', 'Salesman', 7400, '18-May-20', 20000, 900, 'Sales');
+INSERT INTO EMP_59 VALUES(7926, 'Ford', 'Salesman', 7400, '24-Aug-90', 22000, 1050, 'Sales'); 
+INSERT INTO EMP_59 VALUES(7135, 'Triasa', 'Clerk', 7724, '17-Feb-10', 35000, default, 'Accounts'); 
+INSERT INTO EMP_59 VALUES(8000, 'Sumedha', 'Salesman', 7642, '01-Sep-02', 8500, 830, 'Sales'); 
+INSERT INTO EMP_59 VALUES(7724, 'Aviree', 'Manager', NULL, '30-Jan-05', 70000, default, 'Human Resource'); 
+INSERT INTO EMP_59 VALUES(7025, 'Arnab', 'Analyst', 7724, '21-Dec-95', 65000, default, 'Research'); 
+INSERT INTO EMP_59 VALUES(7290, 'Subham', 'Clerk', 7400, '19-Oct-06', 30500, default, 'Marketing'); 
+INSERT INTO EMP_59 VALUES(7642, 'Aniket', 'Manager', NULL, '07-Nov-92', 80000, default, 'Accounts'); 
+INSERT INTO EMP_59 VALUES(7400, 'Prajeet', 'Manager', NULL, '25-Jul-79', 75000, default, 'Research'); 
+
+SELECT ENAME FROM EMP_59 WHERE JOB='Manager';
+
+SELECT ENAME FROM EMP_59 WHERE ENAME LIKE '_i%';
+
+SELECT COUNT(ENAME) FROM EMP_59 WHERE JOB='Manager';
+
+SELECT MAX(SAL) AS MAXIMUM, MIN(SAL) AS MINIMUM, SUM(SAL) AS TOTAL, AVG(SAL) AS AVERAGE FROM EMP_59;
+
+SELECT JOB, MAX(SAL) AS MAXIMUM, MIN(SAL) AS MINIMUM, SUM(SAL) AS TOTAL, AVG(SAL) AS AVERAGE FROM EMP_59 GROUP BY(JOB);
+
+SELECT COUNT(ENAME) AS NUMBER_OF_MANAGERS FROM EMP_59 WHERE JOB='Manager';
+
+SELECT ENAME FROM EMP_59 WHERE HIREDATE > '01-Jan-1980';
+
+SELECT ENAME FROM EMP_59 WHERE SAL=(SELECT MAX(SAL) FROM EMP_59 WHERE JOB='Salesman');
+
+SELECT ENAME FROM EMP_59 WHERE SAL=(SELECT MIN(SAL) FROM EMP_59 WHERE JOB='Clerk');
+
+SELECT ENAME FROM EMP_59 WHERE SAL > (SELECT SAL FROM EMP_59 WHERE ENAME='Turner');
+
+SELECT DEPT_NAME FROM EMP_59 WHERE ENAME='Ford';
+
+SELECT DEPT_NAME FROM EMP_59 WHERE SAL=(SELECT MAX(SAL) FROM EMP_59);
