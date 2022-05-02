@@ -1,0 +1,56 @@
+CREATE TABLE SALESPEOPLE (
+SNUM VARCHAR2(3) PRIMARY KEY,
+SNAME VARCHAR2(20),
+CITY VARCHAR2(20),
+COMM NUMBER(2));
+
+CREATE TABLE CUSTOMER (
+CNUM VARCHAR2(3) PRIMARY KEY,
+CNAME VARCHAR2(20),
+CITY VARCHAR2(20),
+RATING NUMBER(2,1),
+SNUM VARCHAR2(3) REFERENCES SALESPEOPLE(SNUM));
+
+CREATE TABLE ORDERS_59 (
+ONUM VARCHAR2(3) PRIMARY KEY,
+AMT NUMBER(5),
+ODATE DATE,
+CNUM VARCHAR2(3) REFERENCES CUSTOMER(CNUM),
+SNUM VARCHAR2(3) REFERENCES SALESPEOPLE(SNUM));
+
+-----------------SALESPEOPLE---------------------------
+
+SNU SNAME                CITY                       COMM
+--- -------------------- -------------------- ----------
+S01 SMITH                BROOKLYN                   1000
+S02 JACK                 MEXICO                      500
+S03 STEVE                FLORIDA                    1200
+S04 HARRY                LONDON                     2500
+S05 CHARLIE              NEW YORK                      0
+S06 ARJUN                DELHI                       700
+S07 PHILLIPE             CANADA                     2000
+S08 SURAJ                KOLKATA                    1500
+
+
+--------------------CUSTOMER---------------------------
+
+CNU CNAME                CITY                     RATING SNU
+--- -------------------- -------------------- ---------- ---
+C01 EVELYN               NEW YORK                    4.5 S02
+C02 TAYLOR               MUMBAI                      3.5 S01
+C03 JAMES                NASHVILLE                     5 S02
+C04 INEZ                 DELHI                       2.5 S04
+C05 KAZ                  NEW HAMPSHIRE               4.5 S05
+C06 DOROTHEA             OHIO                          2 S08
+
+
+INSERT INTO ORDERS_59 VALUES ('O64', 5600, '12-JAN-02', 'C02', 'S03');
+INSERT INTO ORDERS_59 VALUES ('O73', 5600, '23-FEB-21', 'C01', 'S02');
+INSERT INTO ORDERS_59 VALUES ('O91', 6200, '10-MAR-22', 'C05', 'S01');
+INSERT INTO ORDERS_59 VALUES ('O23', 1000, '03-FEB-04', 'C06', 'S04');
+INSERT INTO ORDERS_59 VALUES ('O21', 1500, '09-DEC-08', 'C03', 'S05');
+INSERT INTO ORDERS_59 VALUES ('O49', 5000, '28-JUN-21', 'C05', 'S07');
+INSERT INTO ORDERS_59 VALUES ('O10', 9000, '21-JUL-19', 'C02', 'S08');
+INSERT INTO ORDERS_59 VALUES ('O38', 5400, '19-SEP-17', 'C01', 'S01');
+INSERT INTO ORDERS_59 VALUES ('O72', 8020, '17-NOV-15', 'C04', 'S05');
+INSERT INTO ORDERS_59 VALUES ('O88', 750,  '24-OCT-14', 'C06', 'S06');
